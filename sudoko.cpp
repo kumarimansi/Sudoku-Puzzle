@@ -7,13 +7,11 @@ using namespace std;
 
 // This function finds an entry in grid
 // that is still unassigned
-bool UnassignedLocation(int grid[N][N],
-							int& row, int& col);
+bool UnassignedLocation(int grid[N][N],int& row, int& col);
 
 // Checks whether it will be legal
 // to assign num to the given row, col
-bool isSafe(int grid[N][N], int row,
-			int col, int num);
+bool isSafe(int grid[N][N], int row,int col, int num);
 
 /* Takes a partially filled-in grid and attempts
 to assign values to all unassigned locations in
@@ -54,8 +52,7 @@ bool SolveSudoku(int grid[N][N])
 	return false;
 }
 
-bool UnassignedLocation(int grid[N][N],
-							int& row, int& col)
+bool UnassignedLocation(int grid[N][N],int& row, int& col)
 {
 	for (row = 0; row < N; row++)
 		for (col = 0; col < N; col++)
@@ -85,20 +82,14 @@ bool UsedInBox(int grid[N][N], int boxStartRow,
 {
 	for (int row = 0; row < 3; row++)
 		for (int col = 0; col < 3; col++)
-			if (grid[row + boxStartRow]
-					[col + boxStartCol] ==
-									num)
+			if (grid[row + boxStartRow][col + boxStartCol] ==num)
 				return true;
 	return false;
 }
 
-bool isSafe(int grid[N][N], int row,
-			int col, int num)
+bool isSafe(int grid[N][N], int row,int col, int num)
 {
-	return !UsedInRow(grid, row, num)
-		&& !UsedInCol(grid, col, num)
-		&& !UsedInBox(grid, row - row % 3,
-						col - col % 3, num)
+	return !UsedInRow(grid, row, num)&& !UsedInCol(grid, col, num)&& !UsedInBox(grid, row - row % 3,col - col % 3, num)
 		&& grid[row][col] == UNASSIGNED;
 }
 
